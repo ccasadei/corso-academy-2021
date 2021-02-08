@@ -75,7 +75,7 @@ model.compile(loss="categorical_crossentropy",
               metrics=["accuracy"])
 
 # addestro il modello
-errors_list = model.fit(X_train, y_train, epochs=10, verbose=0)
+errors_list = model.fit(X_train, y_train, epochs=10, verbose=1)
 
 # visualizzo graficamente l'andamento dell'errore e dell'accuratezza durante la fase di addestramento
 plt.plot(errors_list.history["loss"], label="Errore")
