@@ -60,6 +60,7 @@ model.fit_generator(generator=train_generator,
                     epochs=5,
                     verbose=1)
 
+
 def load_image(img_path):
     # carico l'immagine dal file
     img = image.load_img(img_path, target_size=(224, 224))
