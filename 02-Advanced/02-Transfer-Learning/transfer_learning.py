@@ -1,10 +1,11 @@
+from math import ceil
+
 import numpy as np
 import tensorflow as tf
 from matplotlib import pyplot as plt
 from tensorflow.keras.applications import MobileNetV2, mobilenet_v2
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.models import Model
-from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
@@ -37,7 +38,7 @@ model = Model(inputs=backbone.input, outputs=preds)
 model.summary()
 
 # compilo il modello con una loss di classificazione, l'ottimizzatore Adam ed aggiungendo l'accuracy come metrica
-model.compile(loss="categorical_crossentropy", optimizer=Adam(), metrics=["accuracy"])
+model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 # creo un generatore di immagini che utilizzi la funzione di preprocessing necessaria al modello MobileNetV2
 train_datagen = ImageDataGenerator(preprocessing_function=mobilenet_v2.preprocess_input)
@@ -54,15 +55,10 @@ train_generator = train_datagen.flow_from_directory('./train',
 # addestro il modello usando il generatore di immagini definito in precedenza, indicando
 # quanti cicli eseguire per ogni epoca (lo calcolo dividendo l'ampiezza del dataset per il batch_size)
 # ed utilizzando 10 epoche in tutto
-from math import ceil
-
 model.fit_generator(generator=train_generator,
                     steps_per_epoch=ceil(train_generator.n / train_generator.batch_size),
                     epochs=5,
                     verbose=1)
-
-import numpy as np
-
 
 def load_image(img_path):
     # carico l'immagine dal file
