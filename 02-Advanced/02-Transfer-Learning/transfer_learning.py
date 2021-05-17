@@ -53,12 +53,12 @@ train_generator = train_datagen.flow_from_directory('./train',
                                                     shuffle=True)
 
 # addestro il modello usando il generatore di immagini definito in precedenza, indicando
-# quanti cicli eseguire per ogni epoca (lo calcolo dividendo l'ampiezza del dataset per il batch_size)
-# ed utilizzando 10 epoche in tutto
-model.fit_generator(generator=train_generator,
-                    steps_per_epoch=ceil(train_generator.n / train_generator.batch_size),
-                    epochs=5,
-                    verbose=1)
+# quanti cicli eseguire per ogni epoca (è calcolato dividendo l'ampiezza del dataset per il batch_size)
+# ed utilizzando 5 epoche in tutto
+model.fit(train_generator,
+          steps_per_epoch=len(train_generator),
+          epochs=5,
+          verbose=1)
 
 
 def load_image(img_path):
