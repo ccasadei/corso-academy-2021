@@ -1,6 +1,6 @@
-numpy==1.20.1
-matplotlib==3.3.4
-tensorflow==2.4.1
-simple_image_download==0.2
-scipy==1.6.0
-tqdm==4.56.0
+numpy
+matplotlib
+tensorflow
+simple_image_download
+scipy
+tqdm
